@@ -20,25 +20,25 @@ export default function SearchResult () {
     ];
 
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (query.trim() !== '') {
-      router.push(`/search-result/${(query)}`);
-    }
-  };
+  // const handleSearch = (e) => {
+  //   e.preventDefault();
+  //   if (query.trim() !== '') {
+  //     router.push(`/search-result/${(query)}`);
+  //   }
+  // };
 
-  const [results, setResults] = useState([]);
+  // const [results, setResults] = useState([]);
   
-  useEffect(()=>{
-    const fetchSearchResults = async () => {
-      if (query) {
-        const data = await getSearchResults(query);
-        setResults(data);
-      }
-    };
+  // useEffect(()=>{
+  //   const fetchSearchResults = async () => {
+  //     if (query) {
+  //       const data = await getSearchResults(query);
+  //       setResults(data);
+  //     }
+  //   };
 
-    fetchSearchResults();
-  },[query])
+  //   fetchSearchResults();
+  // },[query])
 
 
   return (

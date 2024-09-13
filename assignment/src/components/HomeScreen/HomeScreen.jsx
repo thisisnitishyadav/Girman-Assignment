@@ -6,30 +6,30 @@ import { useDispatch} from 'react-redux';
 
 const HomeScreen = () => {
     const router= useRouter();
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
 
-    const [query, setQuery] = useState('');
+    // const [query, setQuery] = useState('');
 
-    const handleSearch = (e) => {
-        e.preventDefault();
-        if (query.trim() !== '') {
-          router.push(`/search-result/${(query)}`);
-        }
-      };
+    // const handleSearch = (e) => {
+    //     e.preventDefault();
+    //     if (query.trim() !== '') {
+    //       router.push(`/search-result/${(query)}`);
+    //     }
+    //   };
     
-      const [results, setResults] = useState([]);
+    //   const [results, setResults] = useState([]);
       
-      useEffect(()=>{
-        const fetchSearchResults = async () => {
-          if (query) {
-            const data = await getSearchResults(query);
-            setResults(data);
-          }
-        };
+    //   useEffect(()=>{
+    //     const fetchSearchResults = async () => {
+    //       if (query) {
+    //         const data = await getSearchResults(query);
+    //         setResults(data);
+    //       }
+    //     };
     
-        fetchSearchResults();
-      },[query])
+    //     fetchSearchResults();
+    //   },[query])
     
   return (
     <>
@@ -60,18 +60,18 @@ const HomeScreen = () => {
         <p className="text-6xl sm:text-7xl md:text-8xl lg:text-[100px] font-bold font-sans"> Girman</p>
         </div>
         {/* search bar */}
-        <form onSubmit={handleSearch}>
+        {/* <form onSubmit={handleSearch}> */}
         <div className='flex justify-center items-center border bg-white rounded-lg p-2'>
         <SearchIcon aria-label='menu' type='button' className='cursor-pointer text-gray-400'/>
         <input 
           type="text" 
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          // value={query}
+          // onChange={(e) => setQuery(e.target.value)}
           placeholder="Search" 
           className="w-full pl-2 focus:outline-none" 
         />
         </div>
-        </form>
+        {/* </form> */}
       </div>
     </div>
   
