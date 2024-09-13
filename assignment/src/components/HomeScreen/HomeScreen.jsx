@@ -2,34 +2,38 @@ import React,{useEffect} from 'react'
 import SearchIcon from '@mui/icons-material/Search';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import { useDispatch} from 'react-redux';
+import { users } from '../Card/CardData';
+// import { useDispatch} from 'react-redux';
 
 const HomeScreen = () => {
     const router= useRouter();
     // const dispatch = useDispatch();
 
+    const [query, setQuery] = useState('');
+    const [filteredItems, setFilteredItems] = useState(users);
 
-    // const [query, setQuery] = useState('');
+    const handleSearch = (e) => {
+        e.preventDefault();
+        if (query.trim() !== '') {
+          router.push(`/search-result/${(query)}`);
+        }
+      };
 
-    // const handleSearch = (e) => {
-    //     e.preventDefault();
-    //     if (query.trim() !== '') {
-    //       router.push(`/search-result/${(query)}`);
-    //     }
-    //   };
-    
-    //   const [results, setResults] = useState([]);
-      
-    //   useEffect(()=>{
-    //     const fetchSearchResults = async () => {
-    //       if (query) {
-    //         const data = await getSearchResults(query);
-    //         setResults(data);
-    //       }
-    //     };
-    
-    //     fetchSearchResults();
-    //   },[query])
+      useEffect(() => {
+        const searchQuery = router.query.q || '';
+        setQuery(searchQuery); // Update the query state
+        if (searchQuery) {
+          setFilteredItems(
+            users.filter((users) =>
+              users.toLowerCase().includes(searchQuery.toLowerCase())
+            )
+          );
+        } else {
+          setFilteredItems(users); // Reset to full list if no search query
+        }
+      }, [router.query.q]);
+
+
     
   return (
     <>
@@ -60,18 +64,26 @@ const HomeScreen = () => {
         <p className="text-6xl sm:text-7xl md:text-8xl lg:text-[100px] font-bold font-sans"> Girman</p>
         </div>
         {/* search bar */}
-        {/* <form onSubmit={handleSearch}> */}
+        <form onSubmit={handleSearch}>
         <div className='flex justify-center items-center border bg-white rounded-lg p-2'>
-        <SearchIcon aria-label='menu' type='button' className='cursor-pointer text-gray-400'/>
+        <button type="submit">
+          <SearchIcon aria-label='menu' type='button' className='cursor-pointer text-gray-400'/>
+        </button>
         <input 
           type="text" 
-          // value={query}
-          // onChange={(e) => setQuery(e.target.value)}
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
           placeholder="Search" 
           className="w-full pl-2 focus:outline-none" 
         />
         </div>
-        {/* </form> */}
+        </form>
+        {/* <h2>Results:</h2>
+      <ul>
+        {filteredItems.map((users, index) => (
+          <li key={index}>{users.firstName}</li>
+        ))}
+      </ul> */}
       </div>
     </div>
   
